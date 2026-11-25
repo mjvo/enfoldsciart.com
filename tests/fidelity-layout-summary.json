@@ -1,0 +1,77 @@
+{
+  "reviewDate": "2026-10-10",
+  "reference": "https://enfoldsciart.com/",
+  "buildPreview": "http://127.0.0.1:4173/",
+  "browser": "Codex in-app browser on macOS",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "width": 1440,
+      "height": 900
+    }
+  ],
+  "pages": [
+    {
+      "page": "home",
+      "contentBlocks": 4,
+      "layoutBlocks": 10,
+      "maxMeasuredLayoutDifferencePx": 0,
+      "copyMatches": true,
+      "imageCropPropertiesMatch": true,
+      "marqueeFontAndSpacingMatch": true
+    },
+    {
+      "page": "about",
+      "contentBlocks": 1,
+      "layoutBlocks": 4,
+      "maxMeasuredLayoutDifferencePx": 0,
+      "copyMatches": true,
+      "imageCropPropertiesMatch": true,
+      "marqueeFontAndSpacingMatch": true
+    },
+    {
+      "page": "schedule",
+      "contentBlocks": 26,
+      "layoutBlocks": 10,
+      "maxMeasuredLayoutDifferencePx": 0,
+      "copyMatches": true,
+      "imageCropPropertiesMatch": true,
+      "marqueeFontAndSpacingMatch": true
+    },
+    {
+      "page": "participants",
+      "contentBlocks": 54,
+      "layoutBlocks": 86,
+      "maxMeasuredLayoutDifferencePx": 0,
+      "copyMatches": true,
+      "imageCropPropertiesMatch": true,
+      "marqueeFontAndSpacingMatch": true
+    },
+    {
+      "page": "art",
+      "contentBlocks": 3,
+      "layoutBlocks": 8,
+      "maxMeasuredLayoutDifferencePx": 0,
+      "copyMatches": true,
+      "imageCropPropertiesMatch": true,
+      "marqueeFontAndSpacingMatch": true
+    },
+    {
+      "page": "contact",
+      "contentBlocks": 2,
+      "layoutBlocks": 3,
+      "maxMeasuredLayoutDifferencePx": 0,
+      "copyMatches": true,
+      "imageCropPropertiesMatch": true,
+      "marqueeFontAndSpacingMatch": true
+    }
+  ],
+  "scope": "Layout results compare the original and production-build Fluid Engine block rectangles, not a whole-image pixel diff. Animated frames and externally rendered maps or embeds are not covered by the zero-difference result."
+}

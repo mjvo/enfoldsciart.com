@@ -1,0 +1,30 @@
+/* The original site's Adobe-hosted Orpheus Pro faces. Keeping Adobe's hosting
+   preserves the existing font delivery rather than redistributing font files. */
+@font-face {
+  font-family: orpheus-pro;
+  src: url("https://use.typekit.net/af/2baa0b/00000000000000007735ebd5/31/l?subset_id=2&fvd=n4&v=3") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: orpheus-pro;
+  src: url("https://use.typekit.net/af/ab0afa/00000000000000007735ebd8/31/l?subset_id=2&fvd=n5&v=3") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: orpheus-pro;
+  src: url("https://use.typekit.net/af/64ac83/00000000000000007735ebd7/31/l?subset_id=2&fvd=n7&v=3") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: orpheus-pro;
+  src: url("https://use.typekit.net/af/1b6cd4/00000000000000007735ebd6/31/l?subset_id=2&fvd=i4&v=3") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}

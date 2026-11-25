@@ -1,0 +1,57 @@
+@import "./styles/fonts.css";
+@import "./styles/components.css";
+@import "./styles/reference.css";
+@import "./styles/effects.css";
+@import "./styles/pages/home.css";
+@import "./styles/pages/about.css";
+@import "./styles/pages/schedule.css";
+@import "./styles/pages/participants.css";
+@import "./styles/pages/art.css";
+@import "./styles/pages/contact.css";
+
+/* Original layout and typography are preserved above. These rules replace
+   behavior previously supplied by Squarespace's runtime. */
+.section-background > div,
+.sqs-video-background-native {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.reference-background-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.sqs-block-html .sqs-block-content { position: relative; isolation: isolate; }
+.reference-text-shape { position: absolute; z-index: -1; pointer-events: none; }
+.reference-text-shape svg {
+  width: 100%; height: 100%; overflow: visible;
+  fill: none; stroke: var(--text-highlight-color); stroke-width: .15em;
+  stroke-linecap: square; stroke-linejoin: bevel;
+}
+.reference-map {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1) invert(1) contrast(.85);
+}
+.sqs-block-map .sqs-block-content { height: 100%; position: relative; }
+.sqs-block-accordion .accordion-item__dropdown { display: block; height: 0; transition: height 300ms ease; }
+.accordion-item__click-target[aria-expanded="true"] .plus__vertical-line { transform: rotate(90deg); }
+.header-burger-btn .hidden { display: none; }
+.v6-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.reference-message { min-height: 85vh; padding: 320px 24px 120px; text-align: center; }
+.preFade { opacity: 0; transition-property: opacity; }
+.preScale { opacity: 0; transform: scale(.9); transition-property: transform, opacity; }
+.fadeIn, .scaleIn { opacity: 1 !important; }
+.scaleIn { transform: scale(1) !important; }
+@media (prefers-reduced-motion: reduce) {
+  .accordion-item__dropdown { transition: none; }
+  .preFade, .preScale { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
