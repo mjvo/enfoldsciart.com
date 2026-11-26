@@ -21,34 +21,24 @@ export function initializeReferenceEffects(root: HTMLElement) {
   const scaleSelector = 'h1,h2,h3,footer .sqs-block-content,[data-animation-role="image"]:not([data-animation-override]),[data-animation-role="quote"]:not([data-animation-override]),[data-animation-role="video"],[data-animation-role="section"],[data-animation-role="header-element"],.list-item-rich-animation,.sqs-block-marquee,.sqs-block-accordion,.sqs-block.sqs-background-enabled,.sqs-block-shape';
   const fadeSelector = 'h4,h5,p,[data-animation-role="button"],[data-animation-role="content"],[data-animation-role="date"],.list-item-basic-animation';
   const reveals = [...root.querySelectorAll<HTMLElement>(`${scaleSelector},${fadeSelector}`)].filter(element => !element.closest('.Marquee-measure,.form-wrapper.hidden,[data-has-block-animations]'));
-  const revealObserver = new IntersectionObserver(entries => {
+  const reveal: IntersectionObserverCallback = (entries, observer) => {
     for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
+      if (!entry.isIntersecting || entry.intersectionRatio < observer.thresholds[0]) continue;
       entry.target.classList.add(entry.target.classList.contains('preScale') ? 'scaleIn' : 'fadeIn');
-      revealObserver.unobserve(entry.target);
+      observer.unobserve(entry.target);
     }
-  });
+  };
+  const revealObserver = new IntersectionObserver(reveal);
+  // A sliver of the tall sand image can enter the viewport during initial layout.
+  const textureObserver = new IntersectionObserver(reveal, { threshold: .05 });
   reveals.forEach((element, index) => {
     const scale = element.matches(scaleSelector);
     element.classList.add(scale ? 'preScale' : 'preFade');
     // Apply the delay only on reveal so the observer first sees the settled 90% scale.
     element.style.setProperty('--reference-reveal-delay', `${index * .6 / reveals.length}s`);
     if (motion.matches) element.classList.add(scale ? 'scaleIn' : 'fadeIn');
-  });
-  // Let the first layout and the header's ResizeObserver settle before observing.
-  let revealFrame = requestAnimationFrame(() => {
-    revealFrame = requestAnimationFrame(() => {
-      for (const element of reveals) {
-        if (element.hasAttribute('data-reveal-after-fonts')) {
-          // Font metrics above this image can move it out of the first viewport.
-          void document.fonts.ready.then(() => {
-            if (!disposed) revealObserver.observe(element);
-          });
-        } else {
-          revealObserver.observe(element);
-        }
-      }
-    });
+    else if (element.hasAttribute('data-texture-reveal')) textureObserver.observe(element);
+    else revealObserver.observe(element);
   });
 
   const redraw = () => {
@@ -145,9 +135,9 @@ export function initializeReferenceEffects(root: HTMLElement) {
   return () => {
     disposed = true;
     cancelAnimationFrame(frame);
-    cancelAnimationFrame(revealFrame);
     observer.disconnect();
     revealObserver.disconnect();
+    textureObserver.disconnect();
     reveals.forEach(element => {
       element.classList.remove('preScale', 'preFade', 'scaleIn', 'fadeIn');
       element.style.removeProperty('--reference-reveal-delay');

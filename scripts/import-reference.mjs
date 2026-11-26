@@ -48,7 +48,7 @@ for (const { name, document } of documents) {
   const styles = [...document.querySelectorAll('#siteWrapper style')].map(e => e.textContent);
   pageStyles[name] = styles.join('\n');
   if (name === 'home') {
-    document.querySelector('img[alt="sand texture"]')?.closest('[data-animation-role="image"]')?.setAttribute('data-reveal-after-fonts', '');
+    document.querySelector('img[alt="sand texture"]')?.closest('[data-animation-role="image"]')?.setAttribute('data-texture-reveal', '');
   }
   for (const video of document.querySelectorAll('[data-config-native-video]')) {
     const poster = video.querySelector('img')?.getAttribute('src');
