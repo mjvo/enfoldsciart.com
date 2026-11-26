@@ -37,7 +37,18 @@ export function initializeReferenceEffects(root: HTMLElement) {
   });
   // Let the first layout and the header's ResizeObserver settle before observing.
   let revealFrame = requestAnimationFrame(() => {
-    revealFrame = requestAnimationFrame(() => reveals.forEach(element => revealObserver.observe(element)));
+    revealFrame = requestAnimationFrame(() => {
+      for (const element of reveals) {
+        if (element.hasAttribute('data-reveal-after-fonts')) {
+          // Font metrics above this image can move it out of the first viewport.
+          void document.fonts.ready.then(() => {
+            if (!disposed) revealObserver.observe(element);
+          });
+        } else {
+          revealObserver.observe(element);
+        }
+      }
+    });
   });
 
   const redraw = () => {

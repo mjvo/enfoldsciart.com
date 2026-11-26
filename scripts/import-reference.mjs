@@ -47,6 +47,9 @@ const pageStyles = {};
 for (const { name, document } of documents) {
   const styles = [...document.querySelectorAll('#siteWrapper style')].map(e => e.textContent);
   pageStyles[name] = styles.join('\n');
+  if (name === 'home') {
+    document.querySelector('img[alt="sand texture"]')?.closest('[data-animation-role="image"]')?.setAttribute('data-reveal-after-fonts', '');
+  }
   for (const video of document.querySelectorAll('[data-config-native-video]')) {
     const poster = video.querySelector('img')?.getAttribute('src');
     const strength = video.getAttribute('data-config-filter-strength') || '100';
