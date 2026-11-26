@@ -31,9 +31,8 @@ export function initializeReferenceEffects(root: HTMLElement) {
   reveals.forEach((element, index) => {
     const scale = element.matches(scaleSelector);
     element.classList.add(scale ? 'preScale' : 'preFade');
-    element.style.transitionTimingFunction = 'ease';
-    element.style.transitionDuration = '.65s';
-    element.style.transitionDelay = `${index * .6 / reveals.length}s`;
+    // Apply the delay only on reveal so the observer first sees the settled 90% scale.
+    element.style.setProperty('--reference-reveal-delay', `${index * .6 / reveals.length}s`);
     if (motion.matches) element.classList.add(scale ? 'scaleIn' : 'fadeIn');
     else revealObserver.observe(element);
   });
@@ -136,9 +135,7 @@ export function initializeReferenceEffects(root: HTMLElement) {
     revealObserver.disconnect();
     reveals.forEach(element => {
       element.classList.remove('preScale', 'preFade', 'scaleIn', 'fadeIn');
-      element.style.transitionTimingFunction = '';
-      element.style.transitionDuration = '';
-      element.style.transitionDelay = '';
+      element.style.removeProperty('--reference-reveal-delay');
     });
     window.removeEventListener('resize', redraw);
     root.querySelectorAll('.reference-text-shape').forEach(shape => shape.remove());
