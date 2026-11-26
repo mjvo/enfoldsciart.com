@@ -34,7 +34,10 @@ export function initializeReferenceEffects(root: HTMLElement) {
     // Apply the delay only on reveal so the observer first sees the settled 90% scale.
     element.style.setProperty('--reference-reveal-delay', `${index * .6 / reveals.length}s`);
     if (motion.matches) element.classList.add(scale ? 'scaleIn' : 'fadeIn');
-    else revealObserver.observe(element);
+  });
+  // Let the first layout and the header's ResizeObserver settle before observing.
+  let revealFrame = requestAnimationFrame(() => {
+    revealFrame = requestAnimationFrame(() => reveals.forEach(element => revealObserver.observe(element)));
   });
 
   const redraw = () => {
@@ -131,6 +134,7 @@ export function initializeReferenceEffects(root: HTMLElement) {
   return () => {
     disposed = true;
     cancelAnimationFrame(frame);
+    cancelAnimationFrame(revealFrame);
     observer.disconnect();
     revealObserver.disconnect();
     reveals.forEach(element => {
